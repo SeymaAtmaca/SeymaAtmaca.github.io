@@ -34,16 +34,16 @@ var constant;
 var bX = 10;
 var bY = 150;
 var gravity = 1.5;
-var score = 1500;
+var oxy = 1500;
 var passed=0;
 
 var soundtrack = new Audio();
 var scor = new Audio();
-
+var overgame =new Audio();
 
 soundtrack.src = "soundtrack.mp3";
 scor.src = "sounds_score.mp3";
-
+overgame.src= "over.mp3";
 
 document.addEventListener("keydown",moveUp);
 
@@ -92,13 +92,13 @@ function draw(){
             
             location.reload();
         }
-        else if(score == 0)
+        else if(oxy == 0)
             location.reload();
 
         if(     (bX >= pipe[i].x && bX + astronot.width <= pipe[i].x + oksijen.width )){
             if(bY >= pipe[i].y+wall.height && bY+astronot.height <= pipe[i].y+wall.height+constant){
                 scor.play();
-                score+=200;
+                oxy+=200;
                 passed+=1;
             }
             else if(( bY >= pipe[i].y+constant+wall.height) && (bY+astronot.height <= pipe[i].y+constant+2*wall.height+160)
@@ -113,19 +113,19 @@ function draw(){
     ctx.drawImage(astronot,bX,bY);
     bY += gravity;
 
-    setInterval(scored(),1000);
+    setInterval(oxy_re(),1000);
     
     ctx.fillStyle = "#000";
     ctx.font = "30px Verdana";
-    ctx.fillText("Score : "+score,10,cvs.height-25);
+    ctx.fillText("Oxygen : "+oxy,10,cvs.height-25);
     ctx.fillText("Passed : "+passed,10,cvs.height-3);
 
     requestAnimationFrame(draw);
 }
 
-function scored()
+function oxy_re()
 {
-    score-=1;
+    oxy-=1;
 }
 
 draw();
